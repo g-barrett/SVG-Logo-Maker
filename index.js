@@ -1,16 +1,18 @@
 const fs = require("fs");
 const path = require("path");
 const inquirer = require("inquirer");
+const { Circle, Square, Triangle } = require("./lib/shapes");
+const generateSVG = require("./lib/generateSVG");
 
 const questions = [
     {
         type: "input",
-        name: "logo text",
+        name: "text",
         message: "Enter up to 3 characters for your logo",
     },
     {
         type: "input",
-        name: "text color",
+        name: "text-color",
         message: "Enter text color (Use color keyword or hexadecimal value)",
     },
     {
@@ -21,7 +23,7 @@ const questions = [
     },
     {
         type: "input",
-        name: "shape color",
+        name: "shape-color",
         message: "Enter Shape color (Use color keyword or hexadecimal value)",
     }
 ];
