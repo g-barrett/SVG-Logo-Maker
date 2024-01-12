@@ -1,7 +1,5 @@
 const fs = require("fs");
-const path = require("path");
 const inquirer = require("inquirer");
-const { Circle, Square, Triangle } = require("./lib/shapes");
 const generateSVG = require("./lib/generateSVG");
 
 const questions = [
@@ -12,7 +10,7 @@ const questions = [
     },
     {
         type: "input",
-        name: "text-color",
+        name: "textColor",
         message: "Enter text color (Use color keyword or hexadecimal value)",
     },
     {
@@ -23,7 +21,26 @@ const questions = [
     },
     {
         type: "input",
-        name: "shape-color",
+        name: "shapeColor",
         message: "Enter Shape color (Use color keyword or hexadecimal value)",
     }
 ];
+
+function createFile(fileName, data) {
+	const input = generateSVG(data);
+	fs.writeFile(fileName, input, function (err) {
+		if (err) {
+			return console.error(err);
+		}
+		console.log("Generated logo.svg");
+	});
+}
+
+function init() {
+	inquirer.prompt(questions).then(function (data) {
+		const fileName = "generatedLogo.svg";
+		createFile(fileName, data);
+	});
+}
+
+init();
